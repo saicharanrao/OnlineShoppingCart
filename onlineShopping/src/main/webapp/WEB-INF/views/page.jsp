@@ -27,11 +27,13 @@
 
 <script type="text/javascript">
 	window.menu = '${title}';
-
 </script>
 
 <!-- Bootstrap Core CSS -->
 <link href="${css}/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap Readable theme CSS download from bootswatch.com-->
+<link href="${css}/bootstrap-readable-theme.css" rel="stylesheet">
 
 <!-- Custom CSS -->
 <link href="${css}/myapp.css" rel="stylesheet">
@@ -41,40 +43,44 @@
 
 <body>
 
-	<!-- Navigation -->
-	<%@include file="./shared/navbar.jsp"%>
+	<div class="wrapper">
 
-	<!-- Page Content -->
-	
-	<c:if test="${userClickHome == true }">
-		<!-- If user clicks home page then load this page in content section -->
-		<%@include file="home.jsp"%>
-	</c:if>
-	
-	<c:if test="${userClickAbout == true }">
-		<!-- If user clicks About ,then load this page in content section -->
-		<%@include file="about.jsp"%>
-	</c:if>
-	
-	<c:if test="${userClickContact == true }">
-		<!-- If user clicks Contact , then load this page in content section -->
-		<%@include file="contact.jsp"%>
-	</c:if>
-	
-	
-	
+		<!-- Navigation -->
+		<%@include file="./shared/navbar.jsp"%>
 
-	<!-- /.container -->
+		<!-- Page Content -->
 
-	<!--  Footer line -->
-	<%@include file="./shared/footer.jsp"%>
+		<div class="content">
+			<c:if test="${userClickHome == true }">
+				<!-- If user clicks home page then load this page in content section -->
+				<%@include file="home.jsp"%>
+			</c:if>
 
-	<!-- Bootstrap core JavaScript -->
-	<script src="${js}/jquery.js"></script>
-	<script src="${js}/popper.min.js"></script>
-	<script src="${js}/bootstrap.min.js"></script>
-	<script src="${js}/myapp.js"></script>
+			<c:if test="${userClickAbout == true }">
+				<!-- If user clicks About ,then load this page in content section -->
+				<%@include file="about.jsp"%>
+			</c:if>
 
+			<c:if test="${userClickContact == true }">
+				<!-- If user clicks Contact , then load this page in content section -->
+				<%@include file="contact.jsp"%>
+			</c:if>
+
+		</div>
+
+
+		<!-- /.container -->
+
+		<!--  Footer line -->
+		<%@include file="./shared/footer.jsp"%>
+
+		<!-- Bootstrap core JavaScript -->
+		<script src="${js}/jquery.js"></script>
+		<script src="${js}/popper.min.js"></script>
+		<script src="${js}/bootstrap.min.js"></script>
+		<script src="${js}/myapp.js"></script>
+
+	</div>
 </body>
 
 </html>
