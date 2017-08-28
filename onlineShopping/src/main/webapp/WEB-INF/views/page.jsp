@@ -65,6 +65,12 @@
 				<!-- If user clicks Contact , then load this page in content section -->
 				<%@include file="contact.jsp"%>
 			</c:if>
+			
+			<!-- If user clicks Products , then load All Products or depending on Category -->
+			<c:if test="${userClickAllProducts == true or userClickCategoryProducts}">
+				
+				<%@include file="listProducts.jsp"%>
+			</c:if>
 
 		</div>
 
