@@ -12,8 +12,8 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring.version>4.3.6.RELEASE</spring.version>
-		<hibernate.version>5.2.7.Final</hibernate.version>
+		<spring.version>4.3.10.RELEASE</spring.version>
+		<hibernate.version>5.2.7.FINAL</hibernate.version>
 	</properties>
 
 	<dependencies>
@@ -26,38 +26,6 @@
 			<version>${spring.version}</version>
 		</dependency>
 		
-		<!-- SPRING ORM-->
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		
-		<!-- H2 Database -->
-		
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>1.4.193</version>
-		</dependency>
-		
-		<!-- Hibernate Dependency -->
-		
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>${hibernate.version}</version>
-		</dependency>
-		
-		<!-- Database Connection Pooling -->
-		
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-dbcp2</artifactId>
-			<version>2.1.1</version>
-		</dependency>
-		
 		<!-- JUNIT -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -65,6 +33,39 @@
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- H2 Database -->
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.196</version>
+		</dependency>  
+		
+		<!-- Hibernate dependency -->
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>  
+		
+		<!-- Database Connection Pooling -->
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>2.1.1</version>
+		</dependency>	
+		
+		<!-- SPRING ORM -->
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>	
+		
 		
 		
 	</dependencies>

@@ -13,67 +13,66 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@Configuration()
-@ComponentScan(basePackages="net.charan.shoppingBackEndDTO")
+
+@Configuration
+@ComponentScan(basePackages={"net.charan.shoppingBackEndDTO"})
 @EnableTransactionManagement
 public class HibernateConfig {
-		
-	//DBMS Configuration depending on the database.
+	
+	//Variables representing configuration of Database
 	private final static String DATABASE_URL = "jdbc:h2:tcp://localhost/~/onlineshopping";
 	private final static String DATABASE_DRIVER = "org.h2.Driver";
 	private final static String DATABASE_DIALECT = "org.hibernate.dialect.H2Dialect";
 	private final static String DATABASE_USERNAME = "sa";
 	private final static String DATABASE_PASSWORD = "";
 	
-	//DataSource bean
+	
 	@Bean
-	public DataSource getDataSource(){
+	private DataSource getDataSource(){
+		BasicDataSource datasource = new BasicDataSource();
 		
-		BasicDataSource dataSource = new BasicDataSource();
+		//Setting the parameters
 		
-		//Database Connection Info
-		dataSource.setDriverClassName(DATABASE_DRIVER);
-		dataSource.setUrl(DATABASE_URL);
-		dataSource.setUsername(DATABASE_USERNAME);
-		dataSource.setPassword(DATABASE_PASSWORD);
+		datasource.setDriverClassName(DATABASE_DRIVER);
+		datasource.setUrl(DATABASE_URL);
+		datasource.setUsername(DATABASE_USERNAME);
+		datasource.setPassword(DATABASE_PASSWORD);
 		
-		return dataSource;
+		
+		return datasource;
 	}
 	
-	//Session Factory Bean
 	
 	@Bean
-	public SessionFactory getSessionFactory(DataSource dataSource)
+	public SessionFactory getSessionFactory(DataSource datasource)
 	{
-		LocalSessionFactoryBuilder builder = new LocalSessionFactoryBuilder(dataSource);
+		LocalSessionFactoryBuilder builder =  new LocalSessionFactoryBuilder(datasource);
 		
 		builder.addProperties(getHibernateProperties());
+		
+		//Scan the following package and all my entities are inside
 		builder.scanPackages("net.charan.shoppingBackEndDTO");
 		
 		return builder.buildSessionFactory();
-		
 	}
-	
-	//Methos to return current Hibernate properties
+
+	//All the hibernate properties are returned from here
 	private Properties getHibernateProperties() {
+		// TODO Auto-generated method stub
 		
 		Properties properties = new Properties();
 		
 		properties.put("hibernate.dialect", DATABASE_DIALECT);
-		properties.put("hibernate.format_sql", "true");
 		properties.put("hibernate.show_sql", "true");
+		properties.put("hibernate.format_sql", "true");
 		
-		
-		
-		return null;
+		return properties;
 	}
 	
-	//Transaction Manager Bean
 	@Bean
 	public HibernateTransactionManager getTransactionManager(SessionFactory sessionFactory)
 	{
-		HibernateTransactionManager transactionManager = new HibernateTransactionManager(sessionFactory);
-		
+		HibernateTransactionManager transactionManager = new HibernateTransactionManager();
 		
 		return transactionManager;
 	}

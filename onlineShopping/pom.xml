@@ -12,7 +12,7 @@
 
 	<properties>
 		<javaee.version>7.0</javaee.version>
-		<spring.version>4.3.6.RELEASE</spring.version>
+		<spring.version>4.3.10.RELEASE</spring.version>
 		
 	</properties>
 	<dependencies>
@@ -50,8 +50,7 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		
-		
+
 		
 
 		<!-- JSTL -->
@@ -61,7 +60,8 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-
+		
+		
 	</dependencies>
 	<build>
 		<plugins>
