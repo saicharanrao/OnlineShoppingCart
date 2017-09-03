@@ -13,6 +13,7 @@ $(function(){
 			$('#listProducts').addClass('active');
 			break;
 		default:
+			if(menu == "Home Page")break;
 			$('#listProducts').addClass('active');
 			$('#a_'+menu).addClass('active');
 			break;
