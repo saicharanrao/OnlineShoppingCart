@@ -11,7 +11,7 @@
    ">
 
 	<context:component-scan base-package="net.charan.onlineShopping.controller" />
-	<context:component-scan base-package="net.charan.shoppingBackEndDAOImpl" />
+	<context:component-scan base-package="net.charan" />
 	
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

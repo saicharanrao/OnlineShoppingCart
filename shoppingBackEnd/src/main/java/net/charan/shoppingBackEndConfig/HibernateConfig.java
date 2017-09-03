@@ -27,26 +27,26 @@ public class HibernateConfig {
 	private final static String DATABASE_PASSWORD = "";
 	
 	
-	@Bean
-	private DataSource getDataSource(){
-		BasicDataSource datasource = new BasicDataSource();
+	@Bean("dataSource")
+	public DataSource getDataSource(){
+		BasicDataSource dataSource = new BasicDataSource();
 		
 		//Setting the parameters
 		
-		datasource.setDriverClassName(DATABASE_DRIVER);
-		datasource.setUrl(DATABASE_URL);
-		datasource.setUsername(DATABASE_USERNAME);
-		datasource.setPassword(DATABASE_PASSWORD);
+		dataSource.setDriverClassName(DATABASE_DRIVER);
+		dataSource.setUrl(DATABASE_URL);
+		dataSource.setUsername(DATABASE_USERNAME);
+		dataSource.setPassword(DATABASE_PASSWORD);
 		
 		
-		return datasource;
+		return dataSource;
 	}
 	
 	
 	@Bean
-	public SessionFactory getSessionFactory(DataSource datasource)
+	public SessionFactory getSessionFactory(DataSource dataSource)
 	{
-		LocalSessionFactoryBuilder builder =  new LocalSessionFactoryBuilder(datasource);
+		LocalSessionFactoryBuilder builder =  new LocalSessionFactoryBuilder(dataSource);
 		
 		builder.addProperties(getHibernateProperties());
 		
@@ -72,7 +72,7 @@ public class HibernateConfig {
 	@Bean
 	public HibernateTransactionManager getTransactionManager(SessionFactory sessionFactory)
 	{
-		HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+		HibernateTransactionManager transactionManager = new HibernateTransactionManager(sessionFactory);
 		
 		return transactionManager;
 	}
