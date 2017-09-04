@@ -10,7 +10,7 @@
    http://www.springframework.org/schema/mvc/spring-mvc.xsd
    ">
 
-	<context:component-scan base-package="net.charan.onlineShopping.controller" />
+	<context:component-scan base-package="net.charan.onlineShopping" />
 	<context:component-scan base-package="net.charan" />
 	
 	<bean id="viewResolver"
