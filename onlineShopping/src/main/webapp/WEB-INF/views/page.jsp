@@ -27,6 +27,7 @@
 
 <script type="text/javascript">
 	window.menu = '${title}';
+	window.contextRoot = '${contextRoot}';
 </script>
 
 <!-- Bootstrap Core CSS -->
@@ -34,6 +35,9 @@
 
 <!-- Bootstrap Readable theme CSS download from bootswatch.com-->
 <link href="${css}/bootstrap-readable-theme.css" rel="stylesheet">
+
+<!-- Bootstrap DataTable theme for jQuery Datatables-->
+<link href="${css}/dataTables.bootstrap.css" rel="stylesheet">
 
 <!-- Custom CSS -->
 <link href="${css}/myapp.css" rel="stylesheet">
@@ -67,10 +71,18 @@
 			</c:if>
 			
 			<!-- If user clicks Products , then load All Products or depending on Category -->
-			<c:if test="${userClickAllProducts == true or userClickCategoryProducts}">
+			<c:if test="${userClickAllProducts == true or userClickCategoryProducts == true}">
 				
 				<%@include file="listProducts.jsp"%>
 			</c:if>
+			
+			<!-- If user clicks Specific Product , then load Corresponding Product  -->
+			<c:if test="${userClickShowProduct == true  }">
+				
+				<%@include file="singleProduct.jsp"%>
+			</c:if>
+			
+			
 
 		</div>
 
@@ -84,6 +96,13 @@
 		<script src="${js}/jquery.js"></script>
 		<script src="${js}/popper.min.js"></script>
 		<script src="${js}/bootstrap.min.js"></script>
+		
+		<!-- Datatable plugin -->
+		<script src="${js}/jquery.dataTables.js"></script>
+		
+		<!-- Datatable Bootstrap Script -->
+		<script src="${js}/dataTables.bootstrap.js"></script>
+		
 		<script src="${js}/myapp.js"></script>
 
 	</div>
