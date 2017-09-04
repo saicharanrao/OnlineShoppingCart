@@ -43,6 +43,20 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- SPRING Core exclusions for Logging -->
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
 		<!-- SPRING -->
 
 		<dependency>
@@ -51,7 +65,7 @@
 			<version>${spring.version}</version>
 		</dependency>
 
-		
+
 
 		<!-- JSTL -->
 
@@ -60,7 +74,7 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-		
+
 		<!-- Jackson -->
 
 		<dependency>
@@ -68,13 +82,13 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
 			<version>${jackson.version}</version>
-		</dependency>	
-		
+		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>
