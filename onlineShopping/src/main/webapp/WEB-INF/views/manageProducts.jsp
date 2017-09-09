@@ -3,6 +3,20 @@
 <div class="container">
 
 	<div class="row">
+	
+		<c:if test ="${not empty message }">
+		<div class="col-xs-12">
+			
+			<div class="alert alert-success alert-dismissible">
+			
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				
+				${message }
+			
+			</div>
+			
+		</div>
+		</c:if>
 
 		<div class="col-md-offset-2 col-md-8">
 
@@ -18,7 +32,9 @@
 
 					<!-- All the form elements -->
 
-					<sf:form class="form-horizontal" modelAttribute="product">
+					<sf:form class="form-horizontal" modelAttribute="product"
+					action = "${contextRoot }/manage/products" method = "POST" 
+					enctype= "multipart/form-data"  >
 
 						<div class="form-group">
 
@@ -29,6 +45,7 @@
 
 								<sf:input type="text" path="name" id="name"
 									placeholder="Product Name" class="form-control" />
+								<sf:errors path="name" cssClass="help-block" element="em" />
 							</div>
 
 						</div>
@@ -43,6 +60,7 @@
 
 								<sf:input type="text" path="brand" id="brand"
 									placeholder="Brand Name" class="form-control" />
+									<sf:errors path="brand" cssClass="help-block" element="em" />
 							</div>
 
 						</div>
@@ -56,7 +74,7 @@
 
 								<sf:textarea path="description" id="description" rows="4"
 									placeholder="Description" class="form-control" />  
-								 
+								 <sf:errors path="description" cssClass="help-block" element="em" />
 							</div>
 
 						</div>
@@ -70,7 +88,7 @@
 
 								<sf:input type="number" path="unitPrice" id="unitPrice"
 									placeholder="Unit Price In &#8377" class="form-control" />
-
+								<sf:errors path="unitPrice" cssClass="help-block" element="em" />
 							</div>
 
 						</div>
@@ -88,6 +106,22 @@
 							</div>
 
 						</div>
+						
+						<!-- File element for Image upload -->
+						<div class="form-group">
+
+							<label class="control-label col-md-4" for="file">Select an Image: </label>
+
+							<div class="col-md-8">
+
+								<sf:input type="file" path="file" id="file"
+									 class="form-control" />
+								<sf:errors path="file" cssClass="help-block" element="em"/>
+							</div>
+
+						</div>
+						
+						
 
 						<div class="form-group">
 

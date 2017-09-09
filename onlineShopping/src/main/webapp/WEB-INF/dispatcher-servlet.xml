@@ -21,6 +21,9 @@
 
 	</bean>
 	
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
+	
 	<!-- Loading Static resources -->
 	<mvc:annotation-driven/>
 		<!-- Load all resources from assets dir and load all the sub directories -->
