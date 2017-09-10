@@ -90,6 +90,11 @@ footer {
 	
 }
 
+.adminDataTableImg {
+	height: 50px;
+	width: 50px;
+}
+
 .has-success {
 	color: #4582ec;
 }
