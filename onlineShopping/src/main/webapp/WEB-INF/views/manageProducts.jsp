@@ -250,7 +250,7 @@
 	      </div>
 	      <div class="modal-body">
 	        
-	        <sf:form class="form-horizontal" modelAttribute="category" action="${contextRoot}/manage/category" method="POST">
+	        <sf:form id="categoryForm" class="form-horizontal" modelAttribute="category" action="${contextRoot}/manage/category" method="POST">
 	        	
        			<div class="form-group">
 					<label for="category_name" class="control-label col-md-4">Category Name</label>
