@@ -5,14 +5,29 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 public class Cart {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private int id;
-	@Column(name = "user_id")
-	private int userId;
+	
+	@OneToOne
+	@JoinColumn(name = "uid")
+	private User user;
+	
+	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	/*@Column(name = "user_id")
+	private int userId;*/
 	@Column(name = "grand_total")
 	private double grandTotal;
 	@Column(name = "cart_lines")

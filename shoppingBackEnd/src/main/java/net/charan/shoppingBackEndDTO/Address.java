@@ -5,6 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -12,6 +13,14 @@ public class Address {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	//Many Addresses - One User
+	
+	@ManyToOne
+	private User user;
+	
+	
+	
 	@NotBlank(message = "Please enter address line one!")
 	@Column(name = "address_line_one")
 	private String addressLineOne;
@@ -92,5 +101,15 @@ public class Address {
 	}
 	public void setBilling(boolean billing) {
 		this.billing = billing;
+	}
+	
+
+	
+	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 }
