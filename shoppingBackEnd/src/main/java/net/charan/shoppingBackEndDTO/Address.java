@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -25,8 +24,8 @@ public class Address implements Serializable{
 	
 	//Many Addresses - One User
 	
-	@ManyToOne
-	private User user;
+	/*@ManyToOne
+	private User user;*/
 	
 	
 	
@@ -50,7 +49,16 @@ public class Address implements Serializable{
 	@Column(name="is_billing")
 	private boolean billing;
 	
+	@Column(name = "user_id")
+	private int userId;
 	
+	
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 	@Override
 	public String toString() {
 		return "Address [id=" + id + ", addressLineOne=" + addressLineOne + ", addressLineTwo=" + addressLineTwo
@@ -115,10 +123,10 @@ public class Address implements Serializable{
 
 	
 	
-	public User getUser() {
+	/*public User getUser() {
 		return user;
 	}
 	public void setUser(User user) {
 		this.user = user;
-	}
+	}*/
 }
