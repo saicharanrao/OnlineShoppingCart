@@ -14,7 +14,7 @@
    http://www.springframework.org/schema/webflow-config/spring-webflow-config.xsd
    ">
 
-	<context:component-scan base-package="net.charan.onlineShopping" />
+	 
 	<context:component-scan base-package="net.charan" />
 	
 	<bean id="viewResolver"
@@ -51,6 +51,7 @@
 	
 	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
 		<property name="flowRegistry" ref="flowRegistry" />
+		<property name="order" value="-1" />
 	</bean>
 	
 	<bean id="viewFactoryCreator"
