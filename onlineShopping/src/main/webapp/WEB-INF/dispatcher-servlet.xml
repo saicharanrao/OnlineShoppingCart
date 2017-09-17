@@ -15,7 +15,7 @@
    ">
 
 	 
-	<context:component-scan base-package="net.charan" />
+	<context:component-scan base-package="net.charan " />
 	
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
