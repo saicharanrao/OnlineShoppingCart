@@ -23,6 +23,23 @@ $(function() {
 		break;
 	}
 
+	//--------------------------------------------------------------------
+	
+		var token = $('meta[name="_csrf"]').attr('content');
+		var header = $('meta[name="_csrf_header"]').attr('content');
+		
+		if(token.length > 0 && header.length > 0){
+			
+			//Token Header for Ajax request
+			
+			$(document).ajaxSend(function(e , xhr , options){
+				xhr.setRequestHeader(header,token);
+			});
+			
+		}
+	
+	
+	//--------------------------------------------------------------------
 	// jQuery Datatable
 
 	var $table = $('#productListTable');
@@ -316,6 +333,54 @@ $(function() {
 		});
 	}
 	
+	// Code to validate login form
+	
+//Code to validate a category
+	
+	var $loginForm = $('#loginForm');
+	
+	if($loginForm.length){
+		
+		$loginForm.validate({
+			
+			rules : {
+				
+				username: {
+					
+					required: true,
+					email: true
+					
+				},
+				password: {
+					required: true
+				}
+			},
+			
+			messages : {
+				username: {
+					
+					required: 'Please enter User Name!',
+					email: 'Please enter valid Email Id !'
+					
+				},
+				password: {
+					required: 'Please enter the Password !'
+				}
+			},
+			errorElement : 'em',
+			errorPlacement: function(error,element){
+				
+				//Class of help block
+				error.addClass('help-block');
+				
+				//Add error element after input element
+				error.insertAfter(element);
+				
+			}
+			
+			
+		});
+	}
 	
 	
 	

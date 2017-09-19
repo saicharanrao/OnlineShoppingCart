@@ -18,10 +18,12 @@
 	<http pattern="/resources/**" security="none" />
 	 -->
 	
+	<http pattern = "/resources/**" security="none" />
 	
 	<http>
-		<intercept-url pattern="/**" access="hasAuthority('USER')" />
-		<form-login />
+		<intercept-url pattern="/login" access="permitAll" />
+		<intercept-url pattern="/**" access="hasAuthority('USER')" />		
+		<form-login login-page="/login"/>
 		<logout />
 	
 	
