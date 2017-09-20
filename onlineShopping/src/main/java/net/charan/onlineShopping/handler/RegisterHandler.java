@@ -3,6 +3,7 @@ package net.charan.onlineShopping.handler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.binding.message.MessageBuilder;
 import org.springframework.binding.message.MessageContext;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import net.charan.onlineShopping.model.RegisterModel;
@@ -16,6 +17,9 @@ public class RegisterHandler {
 
 	@Autowired
 	private UserDAO userDAO;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 
 	public RegisterModel init() {
 		return new RegisterModel();
@@ -41,7 +45,10 @@ public class RegisterHandler {
 			cart.setUser(user);
 			user.setCart(cart);
 		}
-
+		
+		//Before pushing into DB, we have to encode our password
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		
 		// Saving user
 
 		userDAO.add(user);
