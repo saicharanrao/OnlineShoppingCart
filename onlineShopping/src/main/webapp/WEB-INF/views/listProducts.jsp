@@ -53,27 +53,28 @@
 
 			<div class="row">
 				<div class="col-xs-12">
+					<div class="container-fluid">
+						<div class="table-responsive">
+							<table id="productListTable"
+								class="table table-striped table-borederd">
 
-					<table id="productListTable"
-						class="table table-striped table-borederd">
+								<thead>
 
-						<thead>
+									<tr>
 
-							<tr>
-								
-								<th></th>
-								<th>Name</th>
-								<th>Brand</th>
-								<th>Price</th>
-								<th>Quantity Available</th>
-								<th></th>
+										<th></th>
+										<th>Name</th>
+										<th>Brand</th>
+										<th>Price</th>
+										<th>Quantity Available</th>
+										<th></th>
 
-							</tr>
+									</tr>
 
 
-						</thead>
+								</thead>
 
-						<!-- <tfoot>
+								<!-- <tfoot>
 
 							<tr>
 								<th>ID</th>
@@ -86,9 +87,15 @@
 							</tr> -->
 
 
-						</tfoot>
+								</tfoot>
 
-					</table>
+							</table>
+
+
+						</div>
+
+					</div>
+
 
 				</div>
 

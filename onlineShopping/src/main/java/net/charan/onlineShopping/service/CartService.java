@@ -1,0 +1,211 @@
+package net.charan.onlineShopping.service;
+
+import java.io.Console;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import net.charan.onlineShopping.model.UserModel;
+import net.charan.shoppingBackEndDAO.CartLineDAO;
+import net.charan.shoppingBackEndDAO.ProductDAO;
+import net.charan.shoppingBackEndDTO.Cart;
+import net.charan.shoppingBackEndDTO.CartLine;
+import net.charan.shoppingBackEndDTO.Product;
+
+@Service("cartService")
+public class CartService {
+
+	@Autowired
+	private CartLineDAO cartLineDAO;
+	
+	@Autowired
+	private ProductDAO productDAO;
+		
+	@Autowired
+	private HttpSession session;
+	
+	public List<CartLine> getCartLines() {
+		
+		//Get all the CartLines
+		return cartLineDAO.list(getCart().getId());
+
+	}
+	
+	/* to update the cart count */
+	public String updateCartLine(int cartLineId, int count) {
+		
+		CartLine cartLine = cartLineDAO.get(cartLineId);		
+		//System.("The cartLine Id is "+cartLineId);
+		if(cartLine == null){
+			return "result=error";
+		}
+		else{
+
+		 
+		Product product = cartLine.getProduct();
+		double oldTotal = cartLine.getTotal();
+		
+		// If requested quantity is less than available count
+		if(product.getQuantity() <= count) {
+			count = product.getQuantity();		
+		}	
+		
+		// update the cart line
+		cartLine.setProductCount(count);
+		cartLine.setBuyingPrice(product.getUnitPrice());
+		cartLine.setTotal(product.getUnitPrice() * count);
+		cartLineDAO.update(cartLine);
+
+	
+		// update the cart
+		Cart cart = this.getCart();
+		cart.setGrandTotal(cart.getGrandTotal() - oldTotal + cartLine.getTotal());
+		cartLineDAO.updateCart(cart);
+		
+		return "result=updated";
+		}
+	}
+
+
+
+	public String addCartLine(int productId) {		
+		
+		String response = null;
+		Cart cart = this.getCart();
+		
+		
+		CartLine cartLine = cartLineDAO.getByCartAndProduct(cart.getId(), productId);
+		
+		if(cartLine == null) {
+			
+			// Adding new cart line
+			cartLine = new CartLine();
+			
+			Product product = productDAO.get(productId);
+			
+			// transfer the product details to cartLine
+			cartLine.setCartId(cart.getId());
+			
+			cartLine.setProduct(product);
+			
+			cartLine.setProductCount(1);   //Since adding first time
+			
+			cartLine.setBuyingPrice(product.getUnitPrice());
+			
+			cartLine.setTotal(product.getUnitPrice());
+			
+			cartLine.setAvailable(true);
+			
+			// Add new cartLine
+			cartLineDAO.add(cartLine);
+			
+			// update the cart
+			
+			cart.setCartLines(cart.getCartLines() + 1);
+			cart.setGrandTotal(cart.getGrandTotal() + cartLine.getTotal());
+			cartLineDAO.updateCart(cart);
+
+			response = "result=added";						
+		} 
+		else {
+			// check if the cartLine has been already reached to maximum count
+			if(cartLine.getProductCount() < 3) {
+				// call the manageCartLine method to increase the count
+				response = this.updateCartLine(cartLine.getId(), cartLine.getProductCount() + 1);				
+			}			
+			else {				
+				response = "result=maximum";				
+			}						
+		}		
+		return response;
+	}
+	
+	private Cart getCart() {
+		//Getting cart by using session
+		return ((UserModel)session.getAttribute("userModel")).getCart();
+	}
+
+
+	public String deleteCartLine(int cartLineId) {
+		
+		CartLine cartLine = cartLineDAO.get(cartLineId);
+		
+		if(cartLine == null)
+			return "result=error";
+		
+		 
+		Cart cart = this.getCart();	
+		cart.setGrandTotal(cart.getGrandTotal() - cartLine.getTotal());
+		cart.setCartLines(cart.getCartLines() - 1);		
+		cartLineDAO.updateCart(cart);
+		
+		// remove the cartLine
+		cartLineDAO.delete(cartLine);
+				
+		return "result=deleted";
+	}
+
+	/*
+	public String validateCartLine() {
+		Cart cart = this.getCart();
+		List<CartLine> cartLines = cartLineDAO.list(cart.getId());
+		double grandTotal = 0.0;
+		int lineCount = 0;
+		String response = "result=success";
+		boolean changed = false;
+		Product product = null;
+		for(CartLine cartLine : cartLines) {					
+			product = cartLine.getProduct();
+			changed = false;
+			// check if the product is active or not
+			// if it is not active make the availability of cartLine as false
+			if((!product.isActive() && product.getQuantity() == 0) && cartLine.isAvailable()) {
+				cartLine.setAvailable(false);
+				changed = true;
+			}			
+			// check if the cartLine is not available
+			// check whether the product is active and has at least one quantity available
+			if((product.isActive() && product.getQuantity() > 0) && !(cartLine.isAvailable())) {
+					cartLine.setAvailable(true);
+					changed = true;
+			}
+			
+			// check if the buying price of product has been changed
+			if(cartLine.getBuyingPrice() != product.getUnitPrice()) {
+				// set the buying price to the new price
+				cartLine.setBuyingPrice(product.getUnitPrice());
+				// calculate and set the new total
+				cartLine.setTotal(cartLine.getProductCount() * product.getUnitPrice());
+				changed = true;				
+			}
+			
+			// check if that much quantity of product is available or not
+			if(cartLine.getProductCount() > product.getQuantity()) {
+				cartLine.setProductCount(product.getQuantity());										
+				cartLine.setTotal(cartLine.getProductCount() * product.getUnitPrice());
+				changed = true;
+				
+			}
+			
+			// changes has happened
+			if(changed) {				
+				//update the cartLine
+				cartLineDAO.update(cartLine);
+				// set the result as modified
+				response = "result=modified";
+			}
+			
+			grandTotal += cartLine.getTotal();
+			lineCount++;
+		}
+		
+		cart.setCartLines(lineCount++);
+		cart.setGrandTotal(grandTotal);
+		cartLineDAO.updateCart(cart);
+
+		return response;
+	}	*/
+}

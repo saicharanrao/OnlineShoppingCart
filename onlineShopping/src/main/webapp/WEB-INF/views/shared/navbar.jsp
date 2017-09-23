@@ -39,7 +39,9 @@
 				</security:authorize>
 
 				<security:authorize access="isAuthenticated()">
-					<li class="dropdown"><a
+					<li class="dropdown" id="userCart">
+					
+					<a
 						class="btn btn-default dropdown-toggle" href="javascript:void(0)"
 						id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="true"> ${userModel.fullName} <span
@@ -49,7 +51,7 @@
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 							<security:authorize access="hasAuthority('USER')">
 								<li id="cart"><a
-									href="${contextRoot}/cart<%-- /${userModel.cart.id} --%>">
+									href="${contextRoot}/cart/show    <%-- /${userModel.cart.id} --%>">
 										<span class="glyphicon glyphicon-shopping-cart"></span> &#160;
 										<span class="badge"> ${userModel.cart.cartLines} </span> -
 										&#8377; ${userModel.cart.grandTotal}
