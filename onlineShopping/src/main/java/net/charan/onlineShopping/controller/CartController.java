@@ -33,11 +33,11 @@ public class CartController {
 			switch(result) {
 				case "added":
 					mv.addObject("message", "Product is successfully added into your Cart!");					
-					//cartService.validateCartLine();
-					break;/*
+					cartService.validateCartLine();
+					break;
 				case "unavailable":
 					mv.addObject("message", "Product quantity is not available!");					
-					break;*/
+					break;
 				case "updated":
 					mv.addObject("message", "Cart has been updated successfully!");					
 					break;
@@ -47,22 +47,22 @@ public class CartController {
 				case "deleted":
 					mv.addObject("message", "CartLine has been successfully deleted!");
 					break;
-				/*case "modified":
+				case "modified":
 					mv.addObject("message", "One or more items inside cart has been modified!");
 					break;
 				case "maximum":
 					mv.addObject("message", "Maximum limit for the item has been reached!");
 					break;
-				*/
+				
 
 			}
 		}
-		/*else {
+		else {
 			String response = cartService.validateCartLine();
 			if(response.equals("result=modified")) {
 				mv.addObject("message", "One or more items inside cart has been modified!");
 			}
-		}*/
+		}
 		
 		mv.addObject("title", "Shopping Cart");
 		mv.addObject("userClickShowCart", true);
@@ -95,7 +95,7 @@ public class CartController {
 	 after validating it redirect to checkout
 	 * if result received is success proceed to checkout 
 	 * else display the message to the user about the changes in cart page
-	 * 	
+	 * 	*/
 	@RequestMapping("/validate")
 	public String validateCart() {	
 		String response = cartService.validateCartLine();
@@ -105,5 +105,5 @@ public class CartController {
 		else {
 			return "redirect:/cart/checkout";
 		}
-	}	*/
+	}	
 }

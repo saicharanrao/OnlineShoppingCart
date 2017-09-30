@@ -35,7 +35,13 @@
 			<scope>provided</scope>
 		</dependency>
 
-
+		 
+		<dependency>
+		    <groupId>antlr</groupId>
+		    <artifactId>antlr</artifactId>
+		    <version>2.7.7</version>
+		</dependency>
+		
 		<!-- JUNIT Dependency -->
 		<dependency>
 			<groupId>junit</groupId>

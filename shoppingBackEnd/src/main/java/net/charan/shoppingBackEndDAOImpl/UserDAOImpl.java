@@ -64,40 +64,46 @@ public class UserDAOImpl implements UserDAO {
 		}
 	}
 
+	
+
+	 
+
 	@Override
-	public Address getBillingAddress(User user) {
-		 
-		String selectQuery = "FROM Address WHERE user = :user AND billing = :billing";
-		
-		try{
-			return sessionFactory.getCurrentSession()
-					.createQuery(selectQuery, Address.class)
-					.setParameter("user", user)
-					.setParameter("billing", true)
-					.getSingleResult();
+	public boolean updateAddress(Address address) {
+		try {			
+			sessionFactory.getCurrentSession().update(address);			
+			return true;
 		}
-		catch(Exception ex){
-			ex.printStackTrace();
+		catch(Exception ex) {
+			return false;
+		}
+	}
+
+	@Override
+	public Address getBillingAddress(int userId) {
+		String selectQuery = "FROM Address WHERE userId = :userId AND billing = :isBilling";
+		try{
+		return sessionFactory
+				.getCurrentSession()
+					.createQuery(selectQuery,Address.class)
+						.setParameter("user", userId)
+						.setParameter("isBilling", true)
+						.getSingleResult();
+		}
+		catch(Exception ex) {
 			return null;
 		}
 	}
 
 	@Override
-	public List<Address> listShippingAddresses(User user) {
-		 
-		String selectQuery = "FROM Address WHERE user = :user AND shipping = :shipping";
-		
-		try{
-			return sessionFactory.getCurrentSession()
-					.createQuery(selectQuery, Address.class)
-					.setParameter("user", user)
-					.setParameter("shipping", true)
-					.getResultList();
-		}
-		catch(Exception ex){
-			ex.printStackTrace();
-			return null;
-		}
+	public List<Address> listShippingAddresses(int userId) {
+		String selectQuery = "FROM Address WHERE userId = :userId AND shipping = :isShipping";
+		return sessionFactory
+				.getCurrentSession()
+					.createQuery(selectQuery,Address.class)
+						.setParameter("userId", userId)
+						.setParameter("isShipping", true)
+							.getResultList();
 	}
 
 }

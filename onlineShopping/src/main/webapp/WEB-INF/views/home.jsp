@@ -21,15 +21,15 @@
 						</ol>
 						<div class="carousel-inner">
 							<div class="item active">
-								<img class="slide-image" src="http://placehold.it/800x300"
+								<img class="slide-image" src="${images}/banner1.jpg"
 									alt="">
 							</div>
 							<div class="item">
-								<img class="slide-image" src="http://placehold.it/800x300"
+								<img class="slide-image" src="${images}/banner2.jpg"
 									alt="">
 							</div>
 							<div class="item">
-								<img class="slide-image" src="http://placehold.it/800x300"
+								<img class="slide-image" src="${images}/banner3.jpg"
 									alt="">
 							</div>
 						</div>

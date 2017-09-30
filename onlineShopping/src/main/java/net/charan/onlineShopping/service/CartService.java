@@ -148,7 +148,9 @@ public class CartService {
 		return "result=deleted";
 	}
 
-	/*
+	 
+
+	
 	public String validateCartLine() {
 		Cart cart = this.getCart();
 		List<CartLine> cartLines = cartLineDAO.list(cart.getId());
@@ -162,13 +164,13 @@ public class CartService {
 			changed = false;
 			// check if the product is active or not
 			// if it is not active make the availability of cartLine as false
-			if((!product.isActive() && product.getQuantity() == 0) && cartLine.isAvailable()) {
+			if((!product.isActive())){// && product.getQuantity() == 0) && cartLine.isAvailable()) {
 				cartLine.setAvailable(false);
 				changed = true;
 			}			
 			// check if the cartLine is not available
 			// check whether the product is active and has at least one quantity available
-			if((product.isActive() && product.getQuantity() > 0) && !(cartLine.isAvailable())) {
+			if( (product.isActive() && product.getQuantity() > 0) && !(cartLine.isAvailable())) {
 					cartLine.setAvailable(true);
 					changed = true;
 			}
@@ -207,5 +209,5 @@ public class CartService {
 		cartLineDAO.updateCart(cart);
 
 		return response;
-	}	*/
+	}	
 }

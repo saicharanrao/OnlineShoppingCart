@@ -1,4 +1,4 @@
-
+<c:set var="availableCount" value="${userModel.cart.cartLines}" />
 <div class="container">
 	
 	<c:if test="${not empty message }">
@@ -79,9 +79,14 @@
 								Shopping</a></td>
 						<td colspan="2" class="hidden-xs"></td>
 						<td class="hidden-xs text-center"><strong>Total Total &#8377; ${userModel.cart.grandTotal}/-</strong></td>
-						<td><a href="#" class="btn btn-success btn-block">Checkout
-								<span class="glyphicon glyphicon-chevron-right"></span>
-						</a></td>
+						<c:choose>
+ 							<c:when test="${availableCount != 0}">
+ 								<td><a href="${contextRoot}/cart/validate" class="btn btn-success btn-block">Checkout <span class="glyphicon glyphicon-chevron-right"></span></a></td>
+ 							</c:when>							
+ 							<c:otherwise>
+ 								<td><a href="javascript:void(0)" class="btn btn-success btn-block disabled">Checkout <span class="glyphicon glyphicon-chevron-right"></span></a></td>
+ 							</c:otherwise>
+ 						</c:choose>	
 					</tr>
 				</tfoot>
 			</table>
