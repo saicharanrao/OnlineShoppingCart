@@ -135,6 +135,11 @@
 					</div>
 
 				</div>
+				
+				For <strong>Admin</strong> related login please use:
+				
+				<strong>Email:</strong> vk@gmail.com	,
+				<strong>Password:</strong> admin .
 
 			</div>
 		</div>

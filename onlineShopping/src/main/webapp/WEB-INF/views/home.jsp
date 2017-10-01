@@ -27,7 +27,7 @@
 						</ol>
 						<div class="carousel-inner">
 							<div class="item active">
-								<img class="slide-image" src="${images}/banner1.jpg"
+								<img class="slide-image" src="${images}/banner4.jpg"
 									alt="">
 							</div>
 							<div class="item">
