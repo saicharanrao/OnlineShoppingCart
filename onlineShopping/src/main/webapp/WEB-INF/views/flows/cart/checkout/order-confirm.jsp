@@ -154,4 +154,4 @@
 		    	<a href="${contextRoot}/show/all/products" class="btn btn-lg btn-warning">Continue Shopping</a>
 		    </div>
 		</div>
-<%@include file="../../flows-shared/footer.jsp" %>	
+<%@include file="../../shared/flows-footer.jsp" %>	

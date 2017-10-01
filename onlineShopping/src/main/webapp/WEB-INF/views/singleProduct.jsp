@@ -59,7 +59,7 @@
 			</c:choose>
 			
 			<!-- Adding to cart -->
-			<security:authorize access="hasAuthority('USER')">
+			<security:authorize access="isAnonymous() or hasAuthority('USER')">
 			<c:choose>
 				<c:when test = "${ product.quantity < 1}">
 				
@@ -81,7 +81,7 @@
 			</security:authorize>
 			
 			<!-- Going back -->
-			<a href = "${contextRoot}/show/all/products" class = "btn btn-primary">Back</a>
+			<a href = "${contextRoot}/show/all/products" class = "btn btn-warning">Back</a>
 		</div>
 
 	</div>

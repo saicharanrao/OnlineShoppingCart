@@ -13,8 +13,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
-/*@Entity
-@Table(name = "order_item")*/
+@Entity
+@Table(name = "order_item")
 public class OrderItem implements Serializable {
 
 	/**
@@ -22,7 +22,7 @@ public class OrderItem implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-/*	@Id
+ 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
@@ -89,6 +89,6 @@ public class OrderItem implements Serializable {
 
 	public void setTotal(double total) {
 		this.total = total;
-	}*/
+	} 
 		
 }

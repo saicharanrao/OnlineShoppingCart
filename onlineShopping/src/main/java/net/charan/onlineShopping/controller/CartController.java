@@ -39,7 +39,8 @@ public class CartController {
 					mv.addObject("message", "Product quantity is not available!");					
 					break;
 				case "updated":
-					mv.addObject("message", "Cart has been updated successfully!");					
+					mv.addObject("message", "Cart has been updated successfully!");	
+					cartService.validateCartLine();
 					break;
 				case "error":
 					mv.addObject("message", "Something went wrong !");					
@@ -86,7 +87,7 @@ public class CartController {
 	}
 	
 	@RequestMapping("/{cartLineId}/delete")
-	public String updateCartLine(@PathVariable int cartLineId) {
+	public String removeCartLine(@PathVariable int cartLineId) {
 		String response = cartService.deleteCartLine(cartLineId);
 		return "redirect:/cart/show?"+response;
 	}

@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.charan.shoppingBackEndDTO.Cart;
 import net.charan.shoppingBackEndDTO.CartLine;
+import net.charan.shoppingBackEndDTO.OrderDetail;
  
 
 public interface CartLineDAO {
@@ -24,7 +25,7 @@ public interface CartLineDAO {
 	public List<CartLine> listAvailable(int cartId);
 	
 	// adding order details
-	//boolean addOrderDetail(OrderDetail orderDetail);
+	boolean addOrderDetail(OrderDetail orderDetail);
 
 	
 }

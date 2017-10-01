@@ -97,7 +97,7 @@ public class CartService {
 			
 			cartLine.setTotal(product.getUnitPrice());
 			
-			cartLine.setAvailable(true);
+			//cartLine.setAvailable(true);
 			
 			// Add new cartLine
 			cartLineDAO.add(cartLine);
@@ -112,7 +112,7 @@ public class CartService {
 		} 
 		else {
 			// check if the cartLine has been already reached to maximum count
-			if(cartLine.getProductCount() < 3) {
+			if(cartLine.getProductCount() < 4) {
 				// call the manageCartLine method to increase the count
 				response = this.updateCartLine(cartLine.getId(), cartLine.getProductCount() + 1);				
 			}			
@@ -164,13 +164,13 @@ public class CartService {
 			changed = false;
 			// check if the product is active or not
 			// if it is not active make the availability of cartLine as false
-			if((!product.isActive())){// && product.getQuantity() == 0) && cartLine.isAvailable()) {
+			if((!product.isActive() && cartLine.isAvailable() )){// && product.getQuantity() == 0) ) {
 				cartLine.setAvailable(false);
 				changed = true;
 			}			
 			// check if the cartLine is not available
 			// check whether the product is active and has at least one quantity available
-			if( (product.isActive() && product.getQuantity() > 0) && !(cartLine.isAvailable())) {
+			if( (product.isActive()  && !(cartLine.isAvailable()))) {  //&& product.getQuantity() > 0)
 					cartLine.setAvailable(true);
 					changed = true;
 			}

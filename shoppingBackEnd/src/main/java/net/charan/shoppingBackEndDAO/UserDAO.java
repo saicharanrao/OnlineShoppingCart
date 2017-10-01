@@ -20,5 +20,6 @@ public interface UserDAO {
 		
 		List<Address> listShippingAddresses(int userId);
 		
-		
+		User get(int id);
+		Address getAddress(int addressId);
 }

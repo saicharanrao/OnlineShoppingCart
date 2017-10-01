@@ -1,14 +1,12 @@
 package net.charan.onlineShopping.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import net.charan.shoppingBackEndDTO.Address;
 import net.charan.shoppingBackEndDTO.Cart;
 import net.charan.shoppingBackEndDTO.CartLine;
- 
-import net.charan.shoppingBackEndDTO.OrderItem;
+import net.charan.shoppingBackEndDTO.OrderDetail;
 import net.charan.shoppingBackEndDTO.User;
 
 
@@ -20,16 +18,25 @@ public class CheckoutModel implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private List<Address> addresses;
+	//private List<Address> addresses;
 	private User user;
 	private Address billing;
 	private Cart cart;
+	 
 	
-	
+	public OrderDetail getOrderDetail() {
+		return orderDetail;
+	}
+
+	public void setOrderDetail(OrderDetail orderDetail) {
+		this.orderDetail = orderDetail;
+	}
+
 	private List<CartLine> cartLines;	
-	//private OrderDetail orderDetail;
+	private OrderDetail orderDetail;
 	private double checkoutTotal;
-	private List<OrderItem> orderItems = new ArrayList<>();
+	
+	/*private List<OrderItem> orderItems = new ArrayList<>();
 	private String paymentMode;
 	private int addressId;
 	

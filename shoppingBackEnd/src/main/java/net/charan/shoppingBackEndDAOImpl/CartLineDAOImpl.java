@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import net.charan.shoppingBackEndDAO.CartLineDAO;
 import net.charan.shoppingBackEndDTO.Cart;
 import net.charan.shoppingBackEndDTO.CartLine;
+import net.charan.shoppingBackEndDTO.OrderDetail;
 
 @Repository("cartLineDAO")
 @Transactional
@@ -105,6 +106,17 @@ public class CartLineDAOImpl implements CartLineDAO{
 		}
 		catch(Exception ex) {
 			ex.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	public boolean addOrderDetail(OrderDetail orderDetail) {
+		try {			
+			sessionFactory.getCurrentSession().persist(orderDetail);			
+			return true;
+		}
+		catch(Exception ex) {
 			return false;
 		}
 	}

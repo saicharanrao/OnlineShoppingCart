@@ -1,4 +1,4 @@
-<%@include file="../../shared/header.jsp" %>
+<%@include file="../../shared/flows-header.jsp" %>
 <div class="container">
 
 	<div class="row">
@@ -77,4 +77,4 @@
 
 	</div>
 </div>
-<%@include file="../../flows-shared/footer.jsp" %>
+<%@include file="../../shared/flows-footer.jsp" %>

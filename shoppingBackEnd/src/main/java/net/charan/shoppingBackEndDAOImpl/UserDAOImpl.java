@@ -86,7 +86,7 @@ public class UserDAOImpl implements UserDAO {
 		return sessionFactory
 				.getCurrentSession()
 					.createQuery(selectQuery,Address.class)
-						.setParameter("user", userId)
+						.setParameter("userId", userId)
 						.setParameter("isBilling", true)
 						.getSingleResult();
 		}
@@ -97,13 +97,35 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public List<Address> listShippingAddresses(int userId) {
-		String selectQuery = "FROM Address WHERE userId = :userId AND shipping = :isShipping";
+		String selectQuery = "FROM Address WHERE userId = :userId AND shipping = :isShipping ORDER BY id DESC";
 		return sessionFactory
 				.getCurrentSession()
 					.createQuery(selectQuery,Address.class)
 						.setParameter("userId", userId)
 						.setParameter("isShipping", true)
 							.getResultList();
+	}
+
+	@Override
+	public User get(int id) {
+		try {			
+			return sessionFactory.getCurrentSession().get(User.class, id);			
+		}
+		catch(Exception ex) {
+			System.out.println(ex.getMessage());
+			return null;
+		}
+	}
+
+	@Override
+	public Address getAddress(int addressId) {
+		try {			
+			return sessionFactory.getCurrentSession().get(Address.class, addressId);			
+		}
+		catch(Exception ex) {
+			System.out.println(ex.getMessage());
+			return null;
+		}
 	}
 
 }

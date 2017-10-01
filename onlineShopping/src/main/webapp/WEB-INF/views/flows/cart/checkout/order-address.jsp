@@ -1,4 +1,4 @@
-<%@include file="../../shared/header.jsp" %>
+<%@include file="../../shared/flows-header.jsp" %>
 <%@taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>			
 <div class="container">
 
@@ -40,7 +40,7 @@
 										
 						<sf:form
 							method="POST"
-							modelAttribute="shipping"
+							modelAttribute="address"
 							class="form-horizontal"
 							id="billingForm"
 						>
@@ -126,4 +126,4 @@
 	</div>	
 
 </div>	
-<%@include file="../../flows-shared/footer.jsp" %>
+<%@include file="../../shared/flows-footer.jsp" %>

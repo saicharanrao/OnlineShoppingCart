@@ -234,7 +234,7 @@ input:checked + .slider:before {
 }
 
 
-.se-pre-con{
+/* .se-pre-con{
 		position:fixed;
 		left:0;
 		top:0;
@@ -242,7 +242,7 @@ input:checked + .slider:before {
 		height:100%;
 		z-index:9999;
 		background:url(../images/pre-loader.gif) 50% no-repeat #fff
-}
+} */
 
 .table-responsive{
 	overflow-x: inherit;

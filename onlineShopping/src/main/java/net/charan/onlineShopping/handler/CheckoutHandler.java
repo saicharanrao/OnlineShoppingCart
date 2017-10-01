@@ -1,6 +1,7 @@
 package net.charan.onlineShopping.handler;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -17,7 +18,11 @@ import net.charan.shoppingBackEndDAO.ProductDAO;
 import net.charan.shoppingBackEndDAO.UserDAO;
 import net.charan.shoppingBackEndDTO.Address;
 import net.charan.shoppingBackEndDTO.Cart;
+import net.charan.shoppingBackEndDTO.CartLine;
+import net.charan.shoppingBackEndDTO.OrderDetail;
 import net.charan.shoppingBackEndDTO.OrderItem;
+import net.charan.shoppingBackEndDTO.Product;
+import net.charan.shoppingBackEndDTO.User;
 
 @Component
 public class CheckoutHandler {
@@ -35,40 +40,21 @@ public class CheckoutHandler {
 	@Autowired
 	private HttpSession session;
 	
-	public CheckoutModel init() {
-		
-		CheckoutModel checkoutModel = new CheckoutModel();
-		UserModel userModel = (UserModel) session.getAttribute("userModel");
-		Cart cart = userModel.getCart();
-				
-		checkoutModel.setCartLines(cartLineDAO.listAvailable(cart.getId()));
-		checkoutModel.setOrderItems(new ArrayList<OrderItem>());
-		
-		List<Address> addresses = userDAO.listShippingAddresses(userModel.getId());
-		checkoutModel.setAddresses(addresses);
-		checkoutModel.setBilling(userDAO.getBillingAddress(userModel.getId()));
-		
-		
-		return checkoutModel;
-	}
-	/*
 	public CheckoutModel init(String name) throws Exception {
-
+		
 		User user = userDAO.getByEmail(name);
+		CheckoutModel checkoutModel = null;	
 
-		// Create a new Checkout Model Object for this method
-		CheckoutModel checkoutModel = null;
-
-		if (user != null) {         //Set all of this only if user is present
+		if(user!=null) {
 			checkoutModel = new CheckoutModel();
-
 			checkoutModel.setUser(user);
 			checkoutModel.setCart(user.getCart());
+			
 			double checkoutTotal = 0.0;
 			List<CartLine> cartLines = cartLineDAO.listAvailable(user.getCart().getId());
 
 			if(cartLines.size() == 0 ) {
-				throw new Exception("No products in Cart for Checkout!");
+				throw new Exception("There are no products available for checkout now!");
 			}
 			
 			for(CartLine cartLine: cartLines) {
@@ -76,63 +62,70 @@ public class CheckoutHandler {
 			}
 			
 			checkoutModel.setCartLines(cartLines);
-			checkoutModel.setCheckoutTotal(checkoutTotal);
-		}
-
+			checkoutModel.setCheckoutTotal(checkoutTotal);			
+		}			
+		
 		return checkoutModel;
 	}
 	
-	
 	public List<Address> getShippingAddresses(CheckoutModel model) {
-		
-		//Get shipping address of the User
-		List<Address> addresses = userDAO.listShippingAddresses(model.getUser().getId());
-		
-		if(addresses.size() == 0) {
-			addresses = new ArrayList<>();
-		}
-
-		addresses.add(addresses.size(), userDAO.getBillingAddress(model.getUser().getId()));			
-		
-		
-		//Return the addresses retrieved
-		return addresses;
-		
-	}
+			
+			//Get shipping address of the User
+			List<Address> addresses = userDAO.listShippingAddresses(model.getUser().getId());
+			
+			if(addresses.size() == 0) {
+				addresses = new ArrayList<>();
+			}
 	
-	public String saveAddressSelection(CheckoutModel checkoutModel, int shippingId) {
-		
-		//This method is to note preferred address of User
-		
-		String transitionValue = "success";
-		
+			addresses.add(addresses.size(), userDAO.getBillingAddress(model.getUser().getId()));			
+			
+			
+			//Return the addresses retrieved
+			return addresses;
+			
+		}
+	
 		 
 		
-		Address shipping = userDAO.getAddress(shippingId);		
+		public String saveAddressSelection(CheckoutModel checkoutModel, int shippingId) {
+
+			String transitionValue = "success";
+			
+			//logger.info(String.valueOf(shippingId));
+			
+			Address shipping = userDAO.getAddress(shippingId);		
+			
+			checkoutModel.setBilling(shipping);
+			
+			return transitionValue;
+			
+		}
+				
 		
-		checkoutModel.setShipping(shipping);
-		
-		return transitionValue;
-		
-	}
+		public String saveAddress(CheckoutModel checkoutModel, Address shipping) {
+
+			String transitionValue = "success";
+			
+			// set the user id
+			// set shipping as true
+			shipping.setUserId(checkoutModel.getUser().getId());
+			shipping.setShipping(true);
+			userDAO.addAddress(shipping);
+			
+			// set the shipping id to flowScope object
+			checkoutModel.setBilling(shipping);
+			
+			return transitionValue;
+			
+		}
+	 
+	
+	
+	
+	
 			
 	
-	public String saveAddress(CheckoutModel checkoutModel, Address shipping) {
-
-		String transitionValue = "success";
-		
-		
-		shipping.setUserId(checkoutModel.getUser().getId());
-		shipping.setShipping(true);
-		userDAO.addAddress(shipping);
-		
-		// setting the shipping id to flowScope object
-		checkoutModel.setShipping(shipping);
-		
-		return transitionValue;
-		
-	}
-		
+	 
 
 	public String saveOrder(CheckoutModel checkoutModel) {
 		String transitionValue = "success";	
@@ -144,7 +137,7 @@ public class CheckoutHandler {
 		orderDetail.setUser(checkoutModel.getUser());
 				
 		// Associate shipping address with User
-		orderDetail.setShipping(checkoutModel.getShipping());
+		orderDetail.setShipping(checkoutModel.getBilling());
 		
 		// Associate billing address
 		Address billing = userDAO.getBillingAddress(checkoutModel.getUser().getId());		
@@ -216,6 +209,6 @@ public class CheckoutHandler {
 	
 	public OrderDetail getOrderDetail(CheckoutModel checkoutModel) {
 		return checkoutModel.getOrderDetail();
-	}*/
+	} 
 
 }
